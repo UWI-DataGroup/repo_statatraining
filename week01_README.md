@@ -1,4 +1,4 @@
-## repo_statatrainingdev
+## repo_statatraining
 ### In-House Stata Training. Development repository
 
 #### WEEK 1 (COLLAPSE and RESHAPE)
