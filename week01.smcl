@@ -1,0 +1,1432 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}X:\OneDrive - The University of the West Indies\repo_datagroup\repo_statatraining\week01.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}26 Sep 2018, 13:10:28
+{txt}
+{com}. 
+. * ----------------------------------------------------
+. ** INSTRUCTIONS
+. ** Using DATASET 1 (dataset01_meteorology.dta), do the following:
+. ** Produce a summary tabulate and summary graph of rainfall totals between 2000 and 2013, summarizing the time into quarter-years (2000q1, 2000q2, and so on)
+. ** ----------------------------------------------------
+. 
+. ** Load dataset 1
+. use "`datapath'\dataset01_meteorology.dta", clear
+{txt}(Barbados daily meteorology data long format: 2000 - 2013)
+
+{com}. 
+. numlabel, add mask("#")
+{res}{txt}
+{com}. tab measure
+
+{txt}Measurement {c |}
+       type {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+   1Av temp {c |}{res}      5,114       20.90       20.90
+{txt}   2Rel Hum {c |}{res}      5,114       20.90       41.79
+{txt}  3Max Temp {c |}{res}      5,114       20.90       62.69
+{txt}  4Min Temp {c |}{res}      5,114       20.90       83.58
+{txt}  5Rainfall {c |}{res}      4,018       16.42      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}     24,474      100.00
+{txt}
+{com}. 
+. **only using rainfall so am getting rid of other variables
+. drop if measure !=5 // note there are no values for 2000-2002
+{txt}(20,456 observations deleted)
+
+{com}. 
+. 
+. **need to use the separate components of the date variable, so splitting them out
+. gen day = day(dov)
+{txt}
+{com}. gen month = month(dov)
+{txt}
+{com}. gen year = year(dov)
+{txt}
+{com}. 
+. **generate a new time variable with a different value for each quarter of each year
+. gen quarter =.
+{txt}(4,018 missing values generated)
+
+{com}. replace quarter = 1 if month <=3 & year==2003
+{txt}(90 real changes made)
+
+{com}. replace quarter = 2 if month >=4 & month <=6 & year==2003
+{txt}(91 real changes made)
+
+{com}. replace quarter = 3 if month >=7 & month <=9 & year==2003
+{txt}(92 real changes made)
+
+{com}. replace quarter = 4 if month >=10 & month <=12 & year==2003
+{txt}(92 real changes made)
+
+{com}. 
+. replace quarter = 5 if month <=3 & year==2004
+{txt}(91 real changes made)
+
+{com}. replace quarter = 6 if month >=4 & month <=6 & year==2004
+{txt}(91 real changes made)
+
+{com}. replace quarter = 7 if month >=7 & month <=9 & year==2004
+{txt}(92 real changes made)
+
+{com}. replace quarter = 8 if month >=10 & month <=12 & year==2004
+{txt}(92 real changes made)
+
+{com}. 
+. replace quarter = 9 if month <=3 & year==2005
+{txt}(90 real changes made)
+
+{com}. replace quarter = 10 if month >=4 & month <=6 & year==2005
+{txt}(91 real changes made)
+
+{com}. replace quarter = 11 if month >=7 & month <=9 & year==2005
+{txt}(92 real changes made)
+
+{com}. replace quarter = 12 if month >=10 & month <=12 & year==2005
+{txt}(92 real changes made)
+
+{com}. 
+. replace quarter = 13 if month <=3 & year==2006
+{txt}(90 real changes made)
+
+{com}. replace quarter = 14 if month >=4 & month <=6 & year==2006
+{txt}(91 real changes made)
+
+{com}. replace quarter = 15 if month >=7 & month <=9 & year==2006
+{txt}(92 real changes made)
+
+{com}. replace quarter = 16 if month >=10 & month <=12 & year==2006
+{txt}(92 real changes made)
+
+{com}. 
+. replace quarter = 17 if month <=3 & year==2007
+{txt}(90 real changes made)
+
+{com}. replace quarter = 18 if month >=4 & month <=6 & year==2007
+{txt}(91 real changes made)
+
+{com}. replace quarter = 19 if month >=7 & month <=9 & year==2007
+{txt}(92 real changes made)
+
+{com}. replace quarter = 20 if month >=10 & month <=12 & year==2007
+{txt}(92 real changes made)
+
+{com}. 
+. replace quarter = 21 if month <=3 & year==2008
+{txt}(91 real changes made)
+
+{com}. replace quarter = 22 if month >=4 & month <=6 & year==2008
+{txt}(91 real changes made)
+
+{com}. replace quarter = 23 if month >=7 & month <=9 & year==2008
+{txt}(92 real changes made)
+
+{com}. replace quarter = 24 if month >=10 & month <=12 & year==2008
+{txt}(92 real changes made)
+
+{com}. 
+. replace quarter = 25 if month <=3 & year==2009
+{txt}(90 real changes made)
+
+{com}. replace quarter = 26 if month >=4 & month <=6 & year==2009
+{txt}(91 real changes made)
+
+{com}. replace quarter = 27 if month >=7 & month <=9 & year==2009
+{txt}(92 real changes made)
+
+{com}. replace quarter = 28 if month >=10 & month <=12 & year==2009
+{txt}(92 real changes made)
+
+{com}. 
+. replace quarter = 29 if month <=3 & year==2010
+{txt}(90 real changes made)
+
+{com}. replace quarter = 30 if month >=4 & month <=6 & year==2010
+{txt}(91 real changes made)
+
+{com}. replace quarter = 31 if month >=7 & month <=9 & year==2010
+{txt}(92 real changes made)
+
+{com}. replace quarter = 32 if month >=10 & month <=12 & year==2010
+{txt}(92 real changes made)
+
+{com}. 
+. replace quarter = 33 if month <=3 & year==2011
+{txt}(90 real changes made)
+
+{com}. replace quarter = 34 if month >=4 & month <=6 & year==2011
+{txt}(91 real changes made)
+
+{com}. replace quarter = 35 if month >=7 & month <=9 & year==2011
+{txt}(92 real changes made)
+
+{com}. replace quarter = 36 if month >=10 & month <=12 & year==2011
+{txt}(92 real changes made)
+
+{com}. 
+. replace quarter = 37 if month <=3 & year==2012
+{txt}(91 real changes made)
+
+{com}. replace quarter = 38 if month >=4 & month <=6 & year==2012
+{txt}(91 real changes made)
+
+{com}. replace quarter = 39 if month >=7 & month <=9 & year==2012
+{txt}(92 real changes made)
+
+{com}. replace quarter = 40 if month >=10 & month <=12 & year==2012
+{txt}(92 real changes made)
+
+{com}. 
+. replace quarter = 41 if month <=3 & year==2013
+{txt}(90 real changes made)
+
+{com}. replace quarter = 42 if month >=4 & month <=6 & year==2013
+{txt}(91 real changes made)
+
+{com}. replace quarter = 43 if month >=7 & month <=9 & year==2013
+{txt}(92 real changes made)
+
+{com}. replace quarter = 44 if month >=10 & month <=12 & year==2013
+{txt}(92 real changes made)
+
+{com}. 
+. label define quarter 1 "Q1 2003" 2 "Q2 2003" 3 "Q3 2003" 4 "Q4 2003" 5 "Q1 2004" 6 "Q2 2004" 7 "Q3 2004" 8 "Q4 2004" 9 "Q1 2005" 10 "Q2 2005" 11 "Q3 2005" 12 "Q4 2005" 13 "Q1 2006" 14 "Q2 2006" 15 "Q3 2006" 16 "Q4 2006" ///
+> 17 "Q1 2007" 18 "Q2 2007" 19 "Q3 2007" 20 "Q4 2007" 21 "Q1 2008" 22 "Q2 2008" 23 "Q3 2008" 24 "Q4 2008" 25 "Q1 2009" 26 "Q2 2009" 27 "Q3 2009" 28 "Q4 2009" 29 "Q1 2010" 30 "Q2 2010" 31 "Q3 2010" 32 "Q4 2010" ///
+> 33 "Q1 2011" 34 "Q2 2011" 35 "Q3 2011" 36 "Q4 2011" 37 "Q1 2012" 38 "Q2 2012" 39 "Q3 2012" 40 "Q4 2012" 41 "Q1 2013" 42 "Q2 2013" 43 "Q3 2013" 44 "Q4 2013"
+{txt}
+{com}. 
+. label values quarter quarter
+{txt}
+{com}. 
+. ** collapse dataset so that all the rainfall in each quarter is 1 row
+. preserve
+{txt}
+{com}.     collapse (sum) value, by(quarter)
+{txt}
+{com}.     list
+{txt}
+     {c TLC}{hline 9}{c -}{hline 7}{c TRC}
+     {c |} {res}quarter   value {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+  1. {c |} {res}Q1 2003   129.7 {txt}{c |}
+  2. {c |} {res}Q2 2003      74 {txt}{c |}
+  3. {c |} {res}Q3 2003     346 {txt}{c |}
+  4. {c |} {res}Q4 2003     430 {txt}{c |}
+  5. {c |} {res}Q1 2004   144.4 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+  6. {c |} {res}Q2 2004   460.2 {txt}{c |}
+  7. {c |} {res}Q3 2004   377.9 {txt}{c |}
+  8. {c |} {res}Q4 2004   641.4 {txt}{c |}
+  9. {c |} {res}Q1 2005   236.5 {txt}{c |}
+ 10. {c |} {res}Q2 2005   464.3 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 11. {c |} {res}Q3 2005   357.2 {txt}{c |}
+ 12. {c |} {res}Q4 2005     627 {txt}{c |}
+ 13. {c |} {res}Q1 2006   264.1 {txt}{c |}
+ 14. {c |} {res}Q2 2006     132 {txt}{c |}
+ 15. {c |} {res}Q3 2006   314.6 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 16. {c |} {res}Q4 2006   437.1 {txt}{c |}
+ 17. {c |} {res}Q1 2007   154.3 {txt}{c |}
+ 18. {c |} {res}Q2 2007     304 {txt}{c |}
+ 19. {c |} {res}Q3 2007   361.2 {txt}{c |}
+ 20. {c |} {res}Q4 2007     455 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 21. {c |} {res}Q1 2008   165.3 {txt}{c |}
+ 22. {c |} {res}Q2 2008   208.3 {txt}{c |}
+ 23. {c |} {res}Q3 2008     460 {txt}{c |}
+ 24. {c |} {res}Q4 2008     635 {txt}{c |}
+ 25. {c |} {res}Q1 2009   186.9 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 26. {c |} {res}Q2 2009   199.8 {txt}{c |}
+ 27. {c |} {res}Q3 2009   407.1 {txt}{c |}
+ 28. {c |} {res}Q4 2009   221.3 {txt}{c |}
+ 29. {c |} {res}Q1 2010    47.6 {txt}{c |}
+ 30. {c |} {res}Q2 2010   389.2 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 31. {c |} {res}Q3 2010   798.9 {txt}{c |}
+ 32. {c |} {res}Q4 2010   650.1 {txt}{c |}
+ 33. {c |} {res}Q1 2011   170.9 {txt}{c |}
+ 34. {c |} {res}Q2 2011   446.1 {txt}{c |}
+ 35. {c |} {res}Q3 2011   533.3 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 36. {c |} {res}Q4 2011   533.8 {txt}{c |}
+ 37. {c |} {res}Q1 2012     202 {txt}{c |}
+ 38. {c |} {res}Q2 2012     280 {txt}{c |}
+ 39. {c |} {res}Q3 2012   457.3 {txt}{c |}
+ 40. {c |} {res}Q4 2012   274.4 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 41. {c |} {res}Q1 2013   119.9 {txt}{c |}
+ 42. {c |} {res}Q2 2013   300.7 {txt}{c |}
+ 43. {c |} {res}Q3 2013       0 {txt}{c |}
+ 44. {c |} {res}Q4 2013       0 {txt}{c |}
+     {c BLC}{hline 9}{c -}{hline 7}{c BRC}
+
+{com}.     graph hbar value, over(quarter)
+{res}{txt}
+{com}. restore
+{txt}
+{com}. 
+. 
+. ** ----------------------------------------------------
+. ** INSTRUCTIONS
+. ** Using DATASET 1 (dataset01_meteorology.dta), do the following:
+. ** Produce a summary tabulate and summary graph of rainfall totals between 2000 and 2013, summarizing the time into month-years (2000m1, 2000m2, and so on)
+. ** ----------------------------------------------------
+. 
+. **generate a new time variable with a different value for each month of each year
+. egen myear=group(month year), label
+{txt}
+{com}. 
+. ** collapse dataset so that all the rainfall in each month-year is 1 row
+. preserve
+{txt}
+{com}.   collapse (sum) value, by (myear)
+{txt}
+{com}.   list
+{txt}
+     {c TLC}{hline 9}{c -}{hline 7}{c TRC}
+     {c |} {res}  myear   value {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+  1. {c |} {res} 1 2003    48.7 {txt}{c |}
+  2. {c |} {res} 1 2004    50.7 {txt}{c |}
+  3. {c |} {res} 1 2005   200.4 {txt}{c |}
+  4. {c |} {res} 1 2006   140.6 {txt}{c |}
+  5. {c |} {res} 1 2007    68.5 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+  6. {c |} {res} 1 2008    89.2 {txt}{c |}
+  7. {c |} {res} 1 2009   127.5 {txt}{c |}
+  8. {c |} {res} 1 2010    25.3 {txt}{c |}
+  9. {c |} {res} 1 2011    80.6 {txt}{c |}
+ 10. {c |} {res} 1 2012    68.4 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 11. {c |} {res} 1 2013    66.4 {txt}{c |}
+ 12. {c |} {res} 2 2003    59.3 {txt}{c |}
+ 13. {c |} {res} 2 2004    45.5 {txt}{c |}
+ 14. {c |} {res} 2 2005    19.2 {txt}{c |}
+ 15. {c |} {res} 2 2006    88.9 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 16. {c |} {res} 2 2007      43 {txt}{c |}
+ 17. {c |} {res} 2 2008    41.6 {txt}{c |}
+ 18. {c |} {res} 2 2009    24.6 {txt}{c |}
+ 19. {c |} {res} 2 2010     3.6 {txt}{c |}
+ 20. {c |} {res} 2 2011    46.4 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 21. {c |} {res} 2 2012    95.3 {txt}{c |}
+ 22. {c |} {res} 2 2013    39.4 {txt}{c |}
+ 23. {c |} {res} 3 2003    21.7 {txt}{c |}
+ 24. {c |} {res} 3 2004    48.2 {txt}{c |}
+ 25. {c |} {res} 3 2005    16.9 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 26. {c |} {res} 3 2006    34.6 {txt}{c |}
+ 27. {c |} {res} 3 2007    42.8 {txt}{c |}
+ 28. {c |} {res} 3 2008    34.5 {txt}{c |}
+ 29. {c |} {res} 3 2009    34.8 {txt}{c |}
+ 30. {c |} {res} 3 2010    18.7 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 31. {c |} {res} 3 2011    43.9 {txt}{c |}
+ 32. {c |} {res} 3 2012    38.3 {txt}{c |}
+ 33. {c |} {res} 3 2013    14.1 {txt}{c |}
+ 34. {c |} {res} 4 2003    15.3 {txt}{c |}
+ 35. {c |} {res} 4 2004   127.1 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 36. {c |} {res} 4 2005    17.6 {txt}{c |}
+ 37. {c |} {res} 4 2006    22.6 {txt}{c |}
+ 38. {c |} {res} 4 2007    74.2 {txt}{c |}
+ 39. {c |} {res} 4 2008    49.3 {txt}{c |}
+ 40. {c |} {res} 4 2009    70.8 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 41. {c |} {res} 4 2010    85.8 {txt}{c |}
+ 42. {c |} {res} 4 2011   143.2 {txt}{c |}
+ 43. {c |} {res} 4 2012      93 {txt}{c |}
+ 44. {c |} {res} 4 2013   153.4 {txt}{c |}
+ 45. {c |} {res} 5 2003    11.5 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 46. {c |} {res} 5 2004     205 {txt}{c |}
+ 47. {c |} {res} 5 2005   249.1 {txt}{c |}
+ 48. {c |} {res} 5 2006    22.2 {txt}{c |}
+ 49. {c |} {res} 5 2007    12.2 {txt}{c |}
+ 50. {c |} {res} 5 2008    16.9 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 51. {c |} {res} 5 2009    54.1 {txt}{c |}
+ 52. {c |} {res} 5 2010   122.3 {txt}{c |}
+ 53. {c |} {res} 5 2011   193.2 {txt}{c |}
+ 54. {c |} {res} 5 2012   166.4 {txt}{c |}
+ 55. {c |} {res} 5 2013    69.6 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 56. {c |} {res} 6 2003    47.2 {txt}{c |}
+ 57. {c |} {res} 6 2004   128.1 {txt}{c |}
+ 58. {c |} {res} 6 2005   197.6 {txt}{c |}
+ 59. {c |} {res} 6 2006    87.2 {txt}{c |}
+ 60. {c |} {res} 6 2007   217.6 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 61. {c |} {res} 6 2008   142.1 {txt}{c |}
+ 62. {c |} {res} 6 2009    74.9 {txt}{c |}
+ 63. {c |} {res} 6 2010   181.1 {txt}{c |}
+ 64. {c |} {res} 6 2011   109.7 {txt}{c |}
+ 65. {c |} {res} 6 2012    20.6 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 66. {c |} {res} 6 2013    77.7 {txt}{c |}
+ 67. {c |} {res} 7 2003   113.3 {txt}{c |}
+ 68. {c |} {res} 7 2004     127 {txt}{c |}
+ 69. {c |} {res} 7 2005   111.4 {txt}{c |}
+ 70. {c |} {res} 7 2006    53.2 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 71. {c |} {res} 7 2007    69.2 {txt}{c |}
+ 72. {c |} {res} 7 2008   150.6 {txt}{c |}
+ 73. {c |} {res} 7 2009   121.4 {txt}{c |}
+ 74. {c |} {res} 7 2010   303.5 {txt}{c |}
+ 75. {c |} {res} 7 2011   188.5 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 76. {c |} {res} 7 2012   112.7 {txt}{c |}
+ 77. {c |} {res} 7 2013       0 {txt}{c |}
+ 78. {c |} {res} 8 2003   157.1 {txt}{c |}
+ 79. {c |} {res} 8 2004   125.3 {txt}{c |}
+ 80. {c |} {res} 8 2005   183.3 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 81. {c |} {res} 8 2006   148.9 {txt}{c |}
+ 82. {c |} {res} 8 2007   212.7 {txt}{c |}
+ 83. {c |} {res} 8 2008   125.1 {txt}{c |}
+ 84. {c |} {res} 8 2009   160.5 {txt}{c |}
+ 85. {c |} {res} 8 2010   178.4 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 86. {c |} {res} 8 2011     153 {txt}{c |}
+ 87. {c |} {res} 8 2012     237 {txt}{c |}
+ 88. {c |} {res} 8 2013       0 {txt}{c |}
+ 89. {c |} {res} 9 2003    75.6 {txt}{c |}
+ 90. {c |} {res} 9 2004   125.6 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 91. {c |} {res} 9 2005    62.5 {txt}{c |}
+ 92. {c |} {res} 9 2006   112.5 {txt}{c |}
+ 93. {c |} {res} 9 2007    79.3 {txt}{c |}
+ 94. {c |} {res} 9 2008   184.3 {txt}{c |}
+ 95. {c |} {res} 9 2009   125.2 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 96. {c |} {res} 9 2010     317 {txt}{c |}
+ 97. {c |} {res} 9 2011   191.8 {txt}{c |}
+ 98. {c |} {res} 9 2012   107.6 {txt}{c |}
+ 99. {c |} {res} 9 2013       0 {txt}{c |}
+100. {c |} {res}10 2003   205.5 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+101. {c |} {res}10 2004   130.2 {txt}{c |}
+102. {c |} {res}10 2005   118.6 {txt}{c |}
+103. {c |} {res}10 2006     197 {txt}{c |}
+104. {c |} {res}10 2007     197 {txt}{c |}
+105. {c |} {res}10 2008   328.2 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+106. {c |} {res}10 2009    82.1 {txt}{c |}
+107. {c |} {res}10 2010   457.3 {txt}{c |}
+108. {c |} {res}10 2011   147.7 {txt}{c |}
+109. {c |} {res}10 2012    91.6 {txt}{c |}
+110. {c |} {res}10 2013       0 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+111. {c |} {res}11 2003   203.4 {txt}{c |}
+112. {c |} {res}11 2004   404.2 {txt}{c |}
+113. {c |} {res}11 2005   378.4 {txt}{c |}
+114. {c |} {res}11 2006   141.3 {txt}{c |}
+115. {c |} {res}11 2007   138.9 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+116. {c |} {res}11 2008   176.8 {txt}{c |}
+117. {c |} {res}11 2009   125.9 {txt}{c |}
+118. {c |} {res}11 2010    97.7 {txt}{c |}
+119. {c |} {res}11 2011   224.3 {txt}{c |}
+120. {c |} {res}11 2012      54 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+121. {c |} {res}11 2013       0 {txt}{c |}
+122. {c |} {res}12 2003    21.1 {txt}{c |}
+123. {c |} {res}12 2004     107 {txt}{c |}
+124. {c |} {res}12 2005     130 {txt}{c |}
+125. {c |} {res}12 2006    98.8 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+126. {c |} {res}12 2007   119.1 {txt}{c |}
+127. {c |} {res}12 2008     130 {txt}{c |}
+128. {c |} {res}12 2009    13.3 {txt}{c |}
+129. {c |} {res}12 2010    95.1 {txt}{c |}
+130. {c |} {res}12 2011   161.8 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+131. {c |} {res}12 2012   128.8 {txt}{c |}
+132. {c |} {res}12 2013       0 {txt}{c |}
+     {c BLC}{hline 9}{c -}{hline 7}{c BRC}
+
+{com}.   graph hbar value, over(myear)
+{res}{txt}
+{com}. restore
+{txt}
+{com}. 
+. ** ----------------------------------------------------
+. ** INSTRUCTIONS
+. ** Using DATASET 1 (dataset01_meteorology.dta), do the following:
+. ** Produce a summary tabulate and summary graph of rainfall totals between 2000 and 2013, summarizing the time into week-years (2000w1, 2000w2, and so on)
+. ** ----------------------------------------------------
+. **generate new time variable with a different value for each week of each year
+. sort year
+{txt}
+{com}. by year: gen daynum =_n
+{txt}
+{com}. egen weekgroup = cut(daynum), group (52) // I know this may not be quite right. Could have used egen cut, and divided the year into multiples of 7 for exact weeks. But that didn't seem right because then week 52 would only have a teeny amount of rainfall
+{txt}
+{com}. egen wkyear=group(weekgroup year), label
+{txt}
+{com}. 
+. ** collapse dataset so that all the rainfall in each week-year is 1 row
+. preserve
+{txt}
+{com}.     collapse (sum) value, by (wkyear)
+{txt}
+{com}.     list
+{txt}
+     {c TLC}{hline 9}{c -}{hline 7}{c TRC}
+     {c |} {res} wkyear   value {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+  1. {c |} {res} 0 2003     6.6 {txt}{c |}
+  2. {c |} {res} 0 2004     3.9 {txt}{c |}
+  3. {c |} {res} 0 2005    23.7 {txt}{c |}
+  4. {c |} {res} 0 2006    22.8 {txt}{c |}
+  5. {c |} {res} 0 2007     6.8 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+  6. {c |} {res} 0 2008     3.6 {txt}{c |}
+  7. {c |} {res} 0 2009    55.4 {txt}{c |}
+  8. {c |} {res} 0 2010      .5 {txt}{c |}
+  9. {c |} {res} 0 2011      .6 {txt}{c |}
+ 10. {c |} {res} 0 2012    35.7 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 11. {c |} {res} 0 2013    16.5 {txt}{c |}
+ 12. {c |} {res} 1 2003     5.4 {txt}{c |}
+ 13. {c |} {res} 1 2004    10.1 {txt}{c |}
+ 14. {c |} {res} 1 2005   140.1 {txt}{c |}
+ 15. {c |} {res} 1 2006    22.5 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 16. {c |} {res} 1 2007    57.4 {txt}{c |}
+ 17. {c |} {res} 1 2008    63.3 {txt}{c |}
+ 18. {c |} {res} 1 2009    16.5 {txt}{c |}
+ 19. {c |} {res} 1 2010    11.7 {txt}{c |}
+ 20. {c |} {res} 1 2011     7.6 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 21. {c |} {res} 1 2012    10.8 {txt}{c |}
+ 22. {c |} {res} 1 2013    28.6 {txt}{c |}
+ 23. {c |} {res} 2 2003      24 {txt}{c |}
+ 24. {c |} {res} 2 2004    10.6 {txt}{c |}
+ 25. {c |} {res} 2 2005    20.7 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 26. {c |} {res} 2 2006    55.6 {txt}{c |}
+ 27. {c |} {res} 2 2007     2.2 {txt}{c |}
+ 28. {c |} {res} 2 2008       3 {txt}{c |}
+ 29. {c |} {res} 2 2009    18.2 {txt}{c |}
+ 30. {c |} {res} 2 2010     5.5 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 31. {c |} {res} 2 2011      34 {txt}{c |}
+ 32. {c |} {res} 2 2012    16.5 {txt}{c |}
+ 33. {c |} {res} 2 2013     5.5 {txt}{c |}
+ 34. {c |} {res} 3 2003    10.6 {txt}{c |}
+ 35. {c |} {res} 3 2004      12 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 36. {c |} {res} 3 2005    15.9 {txt}{c |}
+ 37. {c |} {res} 3 2006    14.8 {txt}{c |}
+ 38. {c |} {res} 3 2007     1.1 {txt}{c |}
+ 39. {c |} {res} 3 2008    14.1 {txt}{c |}
+ 40. {c |} {res} 3 2009    32.8 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 41. {c |} {res} 3 2010     7.6 {txt}{c |}
+ 42. {c |} {res} 3 2011    27.3 {txt}{c |}
+ 43. {c |} {res} 3 2012     3.5 {txt}{c |}
+ 44. {c |} {res} 3 2013    11.2 {txt}{c |}
+ 45. {c |} {res} 4 2003    22.6 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 46. {c |} {res} 4 2004    14.1 {txt}{c |}
+ 47. {c |} {res} 4 2005     3.8 {txt}{c |}
+ 48. {c |} {res} 4 2006    34.2 {txt}{c |}
+ 49. {c |} {res} 4 2007     9.4 {txt}{c |}
+ 50. {c |} {res} 4 2008    16.1 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 51. {c |} {res} 4 2009     9.3 {txt}{c |}
+ 52. {c |} {res} 4 2010      .9 {txt}{c |}
+ 53. {c |} {res} 4 2011    15.8 {txt}{c |}
+ 54. {c |} {res} 4 2012     4.5 {txt}{c |}
+ 55. {c |} {res} 4 2013     8.8 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 56. {c |} {res} 5 2003     8.1 {txt}{c |}
+ 57. {c |} {res} 5 2004    22.1 {txt}{c |}
+ 58. {c |} {res} 5 2005     2.7 {txt}{c |}
+ 59. {c |} {res} 5 2006      17 {txt}{c |}
+ 60. {c |} {res} 5 2007      10 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 61. {c |} {res} 5 2008     8.7 {txt}{c |}
+ 62. {c |} {res} 5 2009     3.6 {txt}{c |}
+ 63. {c |} {res} 5 2010       0 {txt}{c |}
+ 64. {c |} {res} 5 2011    15.6 {txt}{c |}
+ 65. {c |} {res} 5 2012    21.1 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 66. {c |} {res} 5 2013     3.4 {txt}{c |}
+ 67. {c |} {res} 6 2003    18.1 {txt}{c |}
+ 68. {c |} {res} 6 2004    20.2 {txt}{c |}
+ 69. {c |} {res} 6 2005     3.2 {txt}{c |}
+ 70. {c |} {res} 6 2006      37 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 71. {c |} {res} 6 2007    22.4 {txt}{c |}
+ 72. {c |} {res} 6 2008     5.6 {txt}{c |}
+ 73. {c |} {res} 6 2009     5.8 {txt}{c |}
+ 74. {c |} {res} 6 2010     2.1 {txt}{c |}
+ 75. {c |} {res} 6 2011     2.3 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 76. {c |} {res} 6 2012    54.2 {txt}{c |}
+ 77. {c |} {res} 6 2013    15.4 {txt}{c |}
+ 78. {c |} {res} 7 2003    12.3 {txt}{c |}
+ 79. {c |} {res} 7 2004     3.1 {txt}{c |}
+ 80. {c |} {res} 7 2005     5.8 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 81. {c |} {res} 7 2006    24.9 {txt}{c |}
+ 82. {c |} {res} 7 2007     1.6 {txt}{c |}
+ 83. {c |} {res} 7 2008    13.9 {txt}{c |}
+ 84. {c |} {res} 7 2009       9 {txt}{c |}
+ 85. {c |} {res} 7 2010      .6 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 86. {c |} {res} 7 2011    13.7 {txt}{c |}
+ 87. {c |} {res} 7 2012     3.3 {txt}{c |}
+ 88. {c |} {res} 7 2013    15.7 {txt}{c |}
+ 89. {c |} {res} 8 2003       3 {txt}{c |}
+ 90. {c |} {res} 8 2004    12.6 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 91. {c |} {res} 8 2005       5 {txt}{c |}
+ 92. {c |} {res} 8 2006     1.3 {txt}{c |}
+ 93. {c |} {res} 8 2007    14.4 {txt}{c |}
+ 94. {c |} {res} 8 2008     4.7 {txt}{c |}
+ 95. {c |} {res} 8 2009       2 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+ 96. {c |} {res} 8 2010       0 {txt}{c |}
+ 97. {c |} {res} 8 2011    19.2 {txt}{c |}
+ 98. {c |} {res} 8 2012    27.6 {txt}{c |}
+ 99. {c |} {res} 8 2013      .7 {txt}{c |}
+100. {c |} {res} 9 2003     7.2 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+101. {c |} {res} 9 2004    24.7 {txt}{c |}
+102. {c |} {res} 9 2005     5.6 {txt}{c |}
+103. {c |} {res} 9 2006     1.8 {txt}{c |}
+104. {c |} {res} 9 2007     5.1 {txt}{c |}
+105. {c |} {res} 9 2008     2.5 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+106. {c |} {res} 9 2009       8 {txt}{c |}
+107. {c |} {res} 9 2010     1.1 {txt}{c |}
+108. {c |} {res} 9 2011     8.8 {txt}{c |}
+109. {c |} {res} 9 2012    11.8 {txt}{c |}
+110. {c |} {res} 9 2013       0 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+111. {c |} {res}10 2003      .9 {txt}{c |}
+112. {c |} {res}10 2004     5.5 {txt}{c |}
+113. {c |} {res}10 2005     4.5 {txt}{c |}
+114. {c |} {res}10 2006    32.1 {txt}{c |}
+115. {c |} {res}10 2007     1.3 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+116. {c |} {res}10 2008      .4 {txt}{c |}
+117. {c |} {res}10 2009       5 {txt}{c |}
+118. {c |} {res}10 2010    10.3 {txt}{c |}
+119. {c |} {res}10 2011    10.5 {txt}{c |}
+120. {c |} {res}10 2012     3.3 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+121. {c |} {res}10 2013     5.2 {txt}{c |}
+122. {c |} {res}11 2003       9 {txt}{c |}
+123. {c |} {res}11 2004     4.7 {txt}{c |}
+124. {c |} {res}11 2005     4.3 {txt}{c |}
+125. {c |} {res}11 2006      .1 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+126. {c |} {res}11 2007     4.6 {txt}{c |}
+127. {c |} {res}11 2008       6 {txt}{c |}
+128. {c |} {res}11 2009     1.2 {txt}{c |}
+129. {c |} {res}11 2010     4.9 {txt}{c |}
+130. {c |} {res}11 2011     5.7 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+131. {c |} {res}11 2012     7.4 {txt}{c |}
+132. {c |} {res}11 2013       4 {txt}{c |}
+133. {c |} {res}12 2003     1.9 {txt}{c |}
+134. {c |} {res}12 2004      .8 {txt}{c |}
+135. {c |} {res}12 2005     1.2 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+136. {c |} {res}12 2006       0 {txt}{c |}
+137. {c |} {res}12 2007    30.2 {txt}{c |}
+138. {c |} {res}12 2008    23.4 {txt}{c |}
+139. {c |} {res}12 2009    20.5 {txt}{c |}
+140. {c |} {res}12 2010     2.4 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+141. {c |} {res}12 2011     9.8 {txt}{c |}
+142. {c |} {res}12 2012     2.3 {txt}{c |}
+143. {c |} {res}12 2013     4.9 {txt}{c |}
+144. {c |} {res}13 2003       2 {txt}{c |}
+145. {c |} {res}13 2004     1.9 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+146. {c |} {res}13 2005     6.5 {txt}{c |}
+147. {c |} {res}13 2006     2.6 {txt}{c |}
+148. {c |} {res}13 2007    34.2 {txt}{c |}
+149. {c |} {res}13 2008    17.8 {txt}{c |}
+150. {c |} {res}13 2009    23.1 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+151. {c |} {res}13 2010    12.2 {txt}{c |}
+152. {c |} {res}13 2011     2.7 {txt}{c |}
+153. {c |} {res}13 2012     1.3 {txt}{c |}
+154. {c |} {res}13 2013     4.6 {txt}{c |}
+155. {c |} {res}14 2003    13.1 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+156. {c |} {res}14 2004     4.5 {txt}{c |}
+157. {c |} {res}14 2005     1.2 {txt}{c |}
+158. {c |} {res}14 2006     6.9 {txt}{c |}
+159. {c |} {res}14 2007     5.1 {txt}{c |}
+160. {c |} {res}14 2008    29.1 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+161. {c |} {res}14 2009     5.1 {txt}{c |}
+162. {c |} {res}14 2010    45.6 {txt}{c |}
+163. {c |} {res}14 2011    21.1 {txt}{c |}
+164. {c |} {res}14 2012     9.2 {txt}{c |}
+165. {c |} {res}14 2013    29.1 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+166. {c |} {res}15 2003      .2 {txt}{c |}
+167. {c |} {res}15 2004      45 {txt}{c |}
+168. {c |} {res}15 2005      .4 {txt}{c |}
+169. {c |} {res}15 2006     1.1 {txt}{c |}
+170. {c |} {res}15 2007     3.8 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+171. {c |} {res}15 2008     2.3 {txt}{c |}
+172. {c |} {res}15 2009    24.5 {txt}{c |}
+173. {c |} {res}15 2010    15.5 {txt}{c |}
+174. {c |} {res}15 2011    37.6 {txt}{c |}
+175. {c |} {res}15 2012    46.6 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+176. {c |} {res}15 2013    65.8 {txt}{c |}
+177. {c |} {res}16 2003       0 {txt}{c |}
+178. {c |} {res}16 2004    75.1 {txt}{c |}
+179. {c |} {res}16 2005     9.2 {txt}{c |}
+180. {c |} {res}16 2006      11 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+181. {c |} {res}16 2007    18.9 {txt}{c |}
+182. {c |} {res}16 2008      .1 {txt}{c |}
+183. {c |} {res}16 2009    17.7 {txt}{c |}
+184. {c |} {res}16 2010    12.5 {txt}{c |}
+185. {c |} {res}16 2011      70 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+186. {c |} {res}16 2012     9.8 {txt}{c |}
+187. {c |} {res}16 2013    53.6 {txt}{c |}
+188. {c |} {res}17 2003     3.5 {txt}{c |}
+189. {c |} {res}17 2004     3.1 {txt}{c |}
+190. {c |} {res}17 2005    67.1 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+191. {c |} {res}17 2006     3.6 {txt}{c |}
+192. {c |} {res}17 2007      .2 {txt}{c |}
+193. {c |} {res}17 2008      .3 {txt}{c |}
+194. {c |} {res}17 2009    23.5 {txt}{c |}
+195. {c |} {res}17 2010       8 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+196. {c |} {res}17 2011   152.8 {txt}{c |}
+197. {c |} {res}17 2012    89.1 {txt}{c |}
+198. {c |} {res}17 2013    16.1 {txt}{c |}
+199. {c |} {res}18 2003     5.7 {txt}{c |}
+200. {c |} {res}18 2004    13.9 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+201. {c |} {res}18 2005    88.8 {txt}{c |}
+202. {c |} {res}18 2006       4 {txt}{c |}
+203. {c |} {res}18 2007     1.2 {txt}{c |}
+204. {c |} {res}18 2008     2.7 {txt}{c |}
+205. {c |} {res}18 2009     8.8 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+206. {c |} {res}18 2010    21.7 {txt}{c |}
+207. {c |} {res}18 2011    18.1 {txt}{c |}
+208. {c |} {res}18 2012    33.7 {txt}{c |}
+209. {c |} {res}18 2013    24.9 {txt}{c |}
+210. {c |} {res}19 2003     2.2 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+211. {c |} {res}19 2004    32.4 {txt}{c |}
+212. {c |} {res}19 2005    57.9 {txt}{c |}
+213. {c |} {res}19 2006     2.9 {txt}{c |}
+214. {c |} {res}19 2007     8.7 {txt}{c |}
+215. {c |} {res}19 2008     2.6 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+216. {c |} {res}19 2009    19.2 {txt}{c |}
+217. {c |} {res}19 2010    66.1 {txt}{c |}
+218. {c |} {res}19 2011    16.3 {txt}{c |}
+219. {c |} {res}19 2012     7.8 {txt}{c |}
+220. {c |} {res}19 2013     6.1 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+221. {c |} {res}20 2003      .1 {txt}{c |}
+222. {c |} {res}20 2004   140.8 {txt}{c |}
+223. {c |} {res}20 2005    28.7 {txt}{c |}
+224. {c |} {res}20 2006     6.7 {txt}{c |}
+225. {c |} {res}20 2007      .7 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+226. {c |} {res}20 2008    10.2 {txt}{c |}
+227. {c |} {res}20 2009     2.3 {txt}{c |}
+228. {c |} {res}20 2010    15.9 {txt}{c |}
+229. {c |} {res}20 2011     2.4 {txt}{c |}
+230. {c |} {res}20 2012     6.4 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+231. {c |} {res}20 2013    17.5 {txt}{c |}
+232. {c |} {res}21 2003     3.6 {txt}{c |}
+233. {c |} {res}21 2004    16.2 {txt}{c |}
+234. {c |} {res}21 2005    27.7 {txt}{c |}
+235. {c |} {res}21 2006     7.1 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+236. {c |} {res}21 2007     4.3 {txt}{c |}
+237. {c |} {res}21 2008     3.3 {txt}{c |}
+238. {c |} {res}21 2009     4.2 {txt}{c |}
+239. {c |} {res}21 2010    14.9 {txt}{c |}
+240. {c |} {res}21 2011    15.4 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+241. {c |} {res}21 2012    55.5 {txt}{c |}
+242. {c |} {res}21 2013      15 {txt}{c |}
+243. {c |} {res}22 2003     4.7 {txt}{c |}
+244. {c |} {res}22 2004      58 {txt}{c |}
+245. {c |} {res}22 2005    82.7 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+246. {c |} {res}22 2006     7.2 {txt}{c |}
+247. {c |} {res}22 2007   164.5 {txt}{c |}
+248. {c |} {res}22 2008    25.9 {txt}{c |}
+249. {c |} {res}22 2009      .9 {txt}{c |}
+250. {c |} {res}22 2010    53.2 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+251. {c |} {res}22 2011     7.2 {txt}{c |}
+252. {c |} {res}22 2012     2.8 {txt}{c |}
+253. {c |} {res}22 2013     7.9 {txt}{c |}
+254. {c |} {res}23 2003    27.9 {txt}{c |}
+255. {c |} {res}23 2004    13.5 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+256. {c |} {res}23 2005    17.1 {txt}{c |}
+257. {c |} {res}23 2006    22.1 {txt}{c |}
+258. {c |} {res}23 2007       3 {txt}{c |}
+259. {c |} {res}23 2008    62.5 {txt}{c |}
+260. {c |} {res}23 2009    27.5 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+261. {c |} {res}23 2010    17.1 {txt}{c |}
+262. {c |} {res}23 2011    21.5 {txt}{c |}
+263. {c |} {res}23 2012     9.2 {txt}{c |}
+264. {c |} {res}23 2013     9.3 {txt}{c |}
+265. {c |} {res}24 2003       7 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+266. {c |} {res}24 2004    27.6 {txt}{c |}
+267. {c |} {res}24 2005      69 {txt}{c |}
+268. {c |} {res}24 2006    50.8 {txt}{c |}
+269. {c |} {res}24 2007    22.1 {txt}{c |}
+270. {c |} {res}24 2008    23.2 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+271. {c |} {res}24 2009    24.9 {txt}{c |}
+272. {c |} {res}24 2010   100.9 {txt}{c |}
+273. {c |} {res}24 2011    38.3 {txt}{c |}
+274. {c |} {res}24 2012     2.6 {txt}{c |}
+275. {c |} {res}24 2013    28.4 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+276. {c |} {res}25 2003       4 {txt}{c |}
+277. {c |} {res}25 2004    28.2 {txt}{c |}
+278. {c |} {res}25 2005     8.1 {txt}{c |}
+279. {c |} {res}25 2006       6 {txt}{c |}
+280. {c |} {res}25 2007    25.1 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+281. {c |} {res}25 2008    28.3 {txt}{c |}
+282. {c |} {res}25 2009    25.8 {txt}{c |}
+283. {c |} {res}25 2010     5.6 {txt}{c |}
+284. {c |} {res}25 2011    43.7 {txt}{c |}
+285. {c |} {res}25 2012       6 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+286. {c |} {res}25 2013    22.4 {txt}{c |}
+287. {c |} {res}26 2003    39.9 {txt}{c |}
+288. {c |} {res}26 2004    28.1 {txt}{c |}
+289. {c |} {res}26 2005      31 {txt}{c |}
+290. {c |} {res}26 2006    22.3 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+291. {c |} {res}26 2007    17.3 {txt}{c |}
+292. {c |} {res}26 2008    70.3 {txt}{c |}
+293. {c |} {res}26 2009    16.2 {txt}{c |}
+294. {c |} {res}26 2010    77.8 {txt}{c |}
+295. {c |} {res}26 2011    30.6 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+296. {c |} {res}26 2012    23.4 {txt}{c |}
+297. {c |} {res}26 2013       0 {txt}{c |}
+298. {c |} {res}27 2003     6.2 {txt}{c |}
+299. {c |} {res}27 2004    27.4 {txt}{c |}
+300. {c |} {res}27 2005    24.4 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+301. {c |} {res}27 2006    10.7 {txt}{c |}
+302. {c |} {res}27 2007    18.4 {txt}{c |}
+303. {c |} {res}27 2008    21.7 {txt}{c |}
+304. {c |} {res}27 2009    11.2 {txt}{c |}
+305. {c |} {res}27 2010      49 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+306. {c |} {res}27 2011    12.7 {txt}{c |}
+307. {c |} {res}27 2012     1.9 {txt}{c |}
+308. {c |} {res}27 2013       0 {txt}{c |}
+309. {c |} {res}28 2003    60.6 {txt}{c |}
+310. {c |} {res}28 2004    38.5 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+311. {c |} {res}28 2005    20.7 {txt}{c |}
+312. {c |} {res}28 2006     6.9 {txt}{c |}
+313. {c |} {res}28 2007    22.9 {txt}{c |}
+314. {c |} {res}28 2008    21.3 {txt}{c |}
+315. {c |} {res}28 2009    57.9 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+316. {c |} {res}28 2010    77.2 {txt}{c |}
+317. {c |} {res}28 2011    81.2 {txt}{c |}
+318. {c |} {res}28 2012    61.9 {txt}{c |}
+319. {c |} {res}28 2013       0 {txt}{c |}
+320. {c |} {res}29 2003     2.5 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+321. {c |} {res}29 2004    30.7 {txt}{c |}
+322. {c |} {res}29 2005    24.7 {txt}{c |}
+323. {c |} {res}29 2006    10.7 {txt}{c |}
+324. {c |} {res}29 2007     2.8 {txt}{c |}
+325. {c |} {res}29 2008     6.4 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+326. {c |} {res}29 2009    27.3 {txt}{c |}
+327. {c |} {res}29 2010    63.1 {txt}{c |}
+328. {c |} {res}29 2011    38.6 {txt}{c |}
+329. {c |} {res}29 2012    14.9 {txt}{c |}
+330. {c |} {res}29 2013       0 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+331. {c |} {res}30 2003    21.7 {txt}{c |}
+332. {c |} {res}30 2004    39.5 {txt}{c |}
+333. {c |} {res}30 2005    56.1 {txt}{c |}
+334. {c |} {res}30 2006    10.3 {txt}{c |}
+335. {c |} {res}30 2007    25.2 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+336. {c |} {res}30 2008    41.8 {txt}{c |}
+337. {c |} {res}30 2009     6.7 {txt}{c |}
+338. {c |} {res}30 2010      61 {txt}{c |}
+339. {c |} {res}30 2011    66.6 {txt}{c |}
+340. {c |} {res}30 2012    64.4 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+341. {c |} {res}30 2013       0 {txt}{c |}
+342. {c |} {res}31 2003    30.2 {txt}{c |}
+343. {c |} {res}31 2004    38.1 {txt}{c |}
+344. {c |} {res}31 2005    53.9 {txt}{c |}
+345. {c |} {res}31 2006    27.7 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+346. {c |} {res}31 2007    72.5 {txt}{c |}
+347. {c |} {res}31 2008    14.2 {txt}{c |}
+348. {c |} {res}31 2009    96.8 {txt}{c |}
+349. {c |} {res}31 2010    64.4 {txt}{c |}
+350. {c |} {res}31 2011    10.2 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+351. {c |} {res}31 2012    33.4 {txt}{c |}
+352. {c |} {res}31 2013       0 {txt}{c |}
+353. {c |} {res}32 2003    10.8 {txt}{c |}
+354. {c |} {res}32 2004    32.6 {txt}{c |}
+355. {c |} {res}32 2005    31.9 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+356. {c |} {res}32 2006      42 {txt}{c |}
+357. {c |} {res}32 2007    50.2 {txt}{c |}
+358. {c |} {res}32 2008    47.8 {txt}{c |}
+359. {c |} {res}32 2009      14 {txt}{c |}
+360. {c |} {res}32 2010    46.4 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+361. {c |} {res}32 2011    55.4 {txt}{c |}
+362. {c |} {res}32 2012    31.3 {txt}{c |}
+363. {c |} {res}32 2013       0 {txt}{c |}
+364. {c |} {res}33 2003    78.8 {txt}{c |}
+365. {c |} {res}33 2004     6.7 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+366. {c |} {res}33 2005    40.8 {txt}{c |}
+367. {c |} {res}33 2006    70.6 {txt}{c |}
+368. {c |} {res}33 2007    52.4 {txt}{c |}
+369. {c |} {res}33 2008    48.4 {txt}{c |}
+370. {c |} {res}33 2009    40.6 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+371. {c |} {res}33 2010    20.4 {txt}{c |}
+372. {c |} {res}33 2011    37.4 {txt}{c |}
+373. {c |} {res}33 2012     103 {txt}{c |}
+374. {c |} {res}33 2013       0 {txt}{c |}
+375. {c |} {res}34 2003    19.7 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+376. {c |} {res}34 2004    10.7 {txt}{c |}
+377. {c |} {res}34 2005    12.1 {txt}{c |}
+378. {c |} {res}34 2006     2.1 {txt}{c |}
+379. {c |} {res}34 2007    32.5 {txt}{c |}
+380. {c |} {res}34 2008     3.8 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+381. {c |} {res}34 2009    36.7 {txt}{c |}
+382. {c |} {res}34 2010    26.3 {txt}{c |}
+383. {c |} {res}34 2011     7.8 {txt}{c |}
+384. {c |} {res}34 2012    15.5 {txt}{c |}
+385. {c |} {res}34 2013       0 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+386. {c |} {res}35 2003    12.2 {txt}{c |}
+387. {c |} {res}35 2004    26.6 {txt}{c |}
+388. {c |} {res}35 2005    33.1 {txt}{c |}
+389. {c |} {res}35 2006    30.9 {txt}{c |}
+390. {c |} {res}35 2007      28 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+391. {c |} {res}35 2008    61.2 {txt}{c |}
+392. {c |} {res}35 2009     3.9 {txt}{c |}
+393. {c |} {res}35 2010   176.9 {txt}{c |}
+394. {c |} {res}35 2011    82.3 {txt}{c |}
+395. {c |} {res}35 2012       0 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+396. {c |} {res}35 2013       0 {txt}{c |}
+397. {c |} {res}36 2003    39.8 {txt}{c |}
+398. {c |} {res}36 2004    33.7 {txt}{c |}
+399. {c |} {res}36 2005     4.1 {txt}{c |}
+400. {c |} {res}36 2006    45.7 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+401. {c |} {res}36 2007     2.9 {txt}{c |}
+402. {c |} {res}36 2008       9 {txt}{c |}
+403. {c |} {res}36 2009    37.5 {txt}{c |}
+404. {c |} {res}36 2010    16.8 {txt}{c |}
+405. {c |} {res}36 2011    79.2 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+406. {c |} {res}36 2012     7.7 {txt}{c |}
+407. {c |} {res}36 2013       0 {txt}{c |}
+408. {c |} {res}37 2003    13.3 {txt}{c |}
+409. {c |} {res}37 2004    27.2 {txt}{c |}
+410. {c |} {res}37 2005     6.4 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+411. {c |} {res}37 2006      22 {txt}{c |}
+412. {c |} {res}37 2007     5.2 {txt}{c |}
+413. {c |} {res}37 2008      98 {txt}{c |}
+414. {c |} {res}37 2009    10.1 {txt}{c |}
+415. {c |} {res}37 2010   106.4 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+416. {c |} {res}37 2011    29.9 {txt}{c |}
+417. {c |} {res}37 2012    12.6 {txt}{c |}
+418. {c |} {res}37 2013       0 {txt}{c |}
+419. {c |} {res}38 2003    10.3 {txt}{c |}
+420. {c |} {res}38 2004    36.7 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+421. {c |} {res}38 2005    17.9 {txt}{c |}
+422. {c |} {res}38 2006    12.7 {txt}{c |}
+423. {c |} {res}38 2007    30.9 {txt}{c |}
+424. {c |} {res}38 2008    16.1 {txt}{c |}
+425. {c |} {res}38 2009    40.1 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+426. {c |} {res}38 2010    13.2 {txt}{c |}
+427. {c |} {res}38 2011      .4 {txt}{c |}
+428. {c |} {res}38 2012    72.8 {txt}{c |}
+429. {c |} {res}38 2013       0 {txt}{c |}
+430. {c |} {res}39 2003    86.9 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+431. {c |} {res}39 2004    50.6 {txt}{c |}
+432. {c |} {res}39 2005     4.2 {txt}{c |}
+433. {c |} {res}39 2006    18.6 {txt}{c |}
+434. {c |} {res}39 2007     3.5 {txt}{c |}
+435. {c |} {res}39 2008    31.8 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+436. {c |} {res}39 2009    34.2 {txt}{c |}
+437. {c |} {res}39 2010   120.5 {txt}{c |}
+438. {c |} {res}39 2011    49.6 {txt}{c |}
+439. {c |} {res}39 2012    23.3 {txt}{c |}
+440. {c |} {res}39 2013       0 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+441. {c |} {res}40 2003    53.5 {txt}{c |}
+442. {c |} {res}40 2004      20 {txt}{c |}
+443. {c |} {res}40 2005    12.1 {txt}{c |}
+444. {c |} {res}40 2006   129.6 {txt}{c |}
+445. {c |} {res}40 2007    45.2 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+446. {c |} {res}40 2008   151.9 {txt}{c |}
+447. {c |} {res}40 2009    21.9 {txt}{c |}
+448. {c |} {res}40 2010    22.6 {txt}{c |}
+449. {c |} {res}40 2011    35.2 {txt}{c |}
+450. {c |} {res}40 2012    45.3 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+451. {c |} {res}40 2013       0 {txt}{c |}
+452. {c |} {res}41 2003    26.1 {txt}{c |}
+453. {c |} {res}41 2004    31.9 {txt}{c |}
+454. {c |} {res}41 2005    48.1 {txt}{c |}
+455. {c |} {res}41 2006     9.4 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+456. {c |} {res}41 2007    45.5 {txt}{c |}
+457. {c |} {res}41 2008    63.2 {txt}{c |}
+458. {c |} {res}41 2009    16.9 {txt}{c |}
+459. {c |} {res}41 2010    10.3 {txt}{c |}
+460. {c |} {res}41 2011    25.4 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+461. {c |} {res}41 2012     9.8 {txt}{c |}
+462. {c |} {res}41 2013       0 {txt}{c |}
+463. {c |} {res}42 2003    38.8 {txt}{c |}
+464. {c |} {res}42 2004    14.8 {txt}{c |}
+465. {c |} {res}42 2005    33.7 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+466. {c |} {res}42 2006      36 {txt}{c |}
+467. {c |} {res}42 2007    96.9 {txt}{c |}
+468. {c |} {res}42 2008    81.2 {txt}{c |}
+469. {c |} {res}42 2009     2.5 {txt}{c |}
+470. {c |} {res}42 2010      68 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+471. {c |} {res}42 2011    28.7 {txt}{c |}
+472. {c |} {res}42 2012      26 {txt}{c |}
+473. {c |} {res}42 2013       0 {txt}{c |}
+474. {c |} {res}43 2003       2 {txt}{c |}
+475. {c |} {res}43 2004    28.6 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+476. {c |} {res}43 2005    25.7 {txt}{c |}
+477. {c |} {res}43 2006      19 {txt}{c |}
+478. {c |} {res}43 2007    11.6 {txt}{c |}
+479. {c |} {res}43 2008      .1 {txt}{c |}
+480. {c |} {res}43 2009    69.8 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+481. {c |} {res}43 2010   250.6 {txt}{c |}
+482. {c |} {res}43 2011    34.3 {txt}{c |}
+483. {c |} {res}43 2012     1.7 {txt}{c |}
+484. {c |} {res}43 2013       0 {txt}{c |}
+485. {c |} {res}44 2003    74.1 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+486. {c |} {res}44 2004     152 {txt}{c |}
+487. {c |} {res}44 2005     117 {txt}{c |}
+488. {c |} {res}44 2006     9.4 {txt}{c |}
+489. {c |} {res}44 2007     5.7 {txt}{c |}
+490. {c |} {res}44 2008     8.4 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+491. {c |} {res}44 2009     1.4 {txt}{c |}
+492. {c |} {res}44 2010       0 {txt}{c |}
+493. {c |} {res}44 2011    75.6 {txt}{c |}
+494. {c |} {res}44 2012    12.5 {txt}{c |}
+495. {c |} {res}44 2013       0 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+496. {c |} {res}45 2003    66.6 {txt}{c |}
+497. {c |} {res}45 2004    57.5 {txt}{c |}
+498. {c |} {res}45 2005   239.2 {txt}{c |}
+499. {c |} {res}45 2006    12.3 {txt}{c |}
+500. {c |} {res}45 2007   109.3 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+501. {c |} {res}45 2008   124.5 {txt}{c |}
+502. {c |} {res}45 2009    34.7 {txt}{c |}
+503. {c |} {res}45 2010      27 {txt}{c |}
+504. {c |} {res}45 2011    18.4 {txt}{c |}
+505. {c |} {res}45 2012    30.1 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+506. {c |} {res}45 2013       0 {txt}{c |}
+507. {c |} {res}46 2003      19 {txt}{c |}
+508. {c |} {res}46 2004   172.1 {txt}{c |}
+509. {c |} {res}46 2005     2.5 {txt}{c |}
+510. {c |} {res}46 2006    90.1 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+511. {c |} {res}46 2007    18.2 {txt}{c |}
+512. {c |} {res}46 2008    16.9 {txt}{c |}
+513. {c |} {res}46 2009    22.6 {txt}{c |}
+514. {c |} {res}46 2010    46.2 {txt}{c |}
+515. {c |} {res}46 2011      47 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+516. {c |} {res}46 2012     3.4 {txt}{c |}
+517. {c |} {res}46 2013       0 {txt}{c |}
+518. {c |} {res}47 2003    43.1 {txt}{c |}
+519. {c |} {res}47 2004    65.8 {txt}{c |}
+520. {c |} {res}47 2005    18.2 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+521. {c |} {res}47 2006    32.9 {txt}{c |}
+522. {c |} {res}47 2007       0 {txt}{c |}
+523. {c |} {res}47 2008    30.7 {txt}{c |}
+524. {c |} {res}47 2009     4.2 {txt}{c |}
+525. {c |} {res}47 2010    13.3 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+526. {c |} {res}47 2011   109.7 {txt}{c |}
+527. {c |} {res}47 2012       8 {txt}{c |}
+528. {c |} {res}47 2013       0 {txt}{c |}
+529. {c |} {res}48 2003     4.9 {txt}{c |}
+530. {c |} {res}48 2004     4.5 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+531. {c |} {res}48 2005    99.5 {txt}{c |}
+532. {c |} {res}48 2006    27.6 {txt}{c |}
+533. {c |} {res}48 2007    29.7 {txt}{c |}
+534. {c |} {res}48 2008    99.5 {txt}{c |}
+535. {c |} {res}48 2009     6.1 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+536. {c |} {res}48 2010     7.6 {txt}{c |}
+537. {c |} {res}48 2011    10.7 {txt}{c |}
+538. {c |} {res}48 2012    39.3 {txt}{c |}
+539. {c |} {res}48 2013       0 {txt}{c |}
+540. {c |} {res}49 2003      .6 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+541. {c |} {res}49 2004    26.1 {txt}{c |}
+542. {c |} {res}49 2005       1 {txt}{c |}
+543. {c |} {res}49 2006    27.1 {txt}{c |}
+544. {c |} {res}49 2007    57.3 {txt}{c |}
+545. {c |} {res}49 2008       1 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+546. {c |} {res}49 2009       7 {txt}{c |}
+547. {c |} {res}49 2010       2 {txt}{c |}
+548. {c |} {res}49 2011    46.9 {txt}{c |}
+549. {c |} {res}49 2012    13.4 {txt}{c |}
+550. {c |} {res}49 2013       0 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+551. {c |} {res}50 2003     2.6 {txt}{c |}
+552. {c |} {res}50 2004      14 {txt}{c |}
+553. {c |} {res}50 2005    11.3 {txt}{c |}
+554. {c |} {res}50 2006     9.2 {txt}{c |}
+555. {c |} {res}50 2007    28.3 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+556. {c |} {res}50 2008       6 {txt}{c |}
+557. {c |} {res}50 2009       0 {txt}{c |}
+558. {c |} {res}50 2010    76.8 {txt}{c |}
+559. {c |} {res}50 2011     1.4 {txt}{c |}
+560. {c |} {res}50 2012    22.4 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+561. {c |} {res}50 2013       0 {txt}{c |}
+562. {c |} {res}51 2003    11.8 {txt}{c |}
+563. {c |} {res}51 2004     4.9 {txt}{c |}
+564. {c |} {res}51 2005    14.5 {txt}{c |}
+565. {c |} {res}51 2006    15.9 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+566. {c |} {res}51 2007     3.8 {txt}{c |}
+567. {c |} {res}51 2008    19.8 {txt}{c |}
+568. {c |} {res}51 2009       0 {txt}{c |}
+569. {c |} {res}51 2010     5.2 {txt}{c |}
+570. {c |} {res}51 2011    50.9 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 7}{c RT}
+571. {c |} {res}51 2012    53.7 {txt}{c |}
+572. {c |} {res}51 2013       0 {txt}{c |}
+     {c BLC}{hline 9}{c -}{hline 7}{c BRC}
+
+{com}.     graph hbar value, over(wkyear)
+{res}{txt}
+{com}. restore
+{txt}
+{com}. 
+. ** ----------------------------------------------------
+. ** Using DATASET 2 (dataset02_asthma.dta), do the following:
+. ** Tabulate the number of annual paediatric events along with an annual summary of dust levels
+. **----------------------------------------------------
+. 
+. ** load dataset
+. use "`datapath'\dataset02_asthma.dta", clear
+{txt}(Asthma events and african dust constituents: 1996-2005)
+
+{com}. 
+. **look at distribution of dust level by year to pick an appropriate summary measure
+. *histogram dust, by(yoa) /// not normally distributed so going to use median
+> 
+. ** Collapse dataset so there is one row per year, containing the median dust level for that year along with the total number of paediatric events.
+. ** Create dataset with year and sum of paediatric events
+. tempfile dust pa
+{txt}
+{com}. preserve
+{txt}
+{com}.     keep yoa pa
+{txt}
+{com}.     collapse (sum) pa, by(yoa)
+{txt}
+{com}.     save `pa'
+{txt}file C:\Users\IANHAM~1\AppData\Local\Temp\ST_99bc_000005.tmp saved
+
+{com}. restore
+{txt}
+{com}. 
+. ** Create dataset with year and median dust level
+. preserve
+{txt}
+{com}.     keep yoa dust
+{txt}
+{com}.     collapse (median) dust, by(yoa)
+{txt}
+{com}.     save `dust'
+{txt}file C:\Users\IANHAM~1\AppData\Local\Temp\ST_99bc_000004.tmp saved
+
+{com}. restore
+{txt}
+{com}. 
+. ** combine the datasets
+. use `pa', clear
+{txt}(Asthma events and african dust constituents: 1996-2005)
+
+{com}. merge 1:1 yoa using `dust'
+{res}
+{txt}{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}               0
+{txt}{col 5}matched{col 30}{res}              10{txt}  (_merge==3)
+{col 5}{hline 41}
+
+{com}. drop _merge
+{txt}
+{com}. 
+. *tabulate results
+. list yoa pa dust
+{txt}
+     {c TLC}{hline 6}{c -}{hline 6}{c -}{hline 10}{c TRC}
+     {c |} {res} yoa     pa       dust {txt}{c |}
+     {c LT}{hline 6}{c -}{hline 6}{c -}{hline 10}{c RT}
+  1. {c |} {res}1996   6959   3.835901 {txt}{c |}
+  2. {c |} {res}1997   8392   8.297643 {txt}{c |}
+  3. {c |} {res}1998   5900   11.53232 {txt}{c |}
+  4. {c |} {res}1999   6449   5.495049 {txt}{c |}
+  5. {c |} {res}2000   5612   9.622713 {txt}{c |}
+     {c LT}{hline 6}{c -}{hline 6}{c -}{hline 10}{c RT}
+  6. {c |} {res}2001   5240   13.14182 {txt}{c |}
+  7. {c |} {res}2002   5410   11.96313 {txt}{c |}
+  8. {c |} {res}2003   6485   4.685109 {txt}{c |}
+  9. {c |} {res}2004   6420   4.474849 {txt}{c |}
+ 10. {c |} {res}2005   5971   4.826207 {txt}{c |}
+     {c BLC}{hline 6}{c -}{hline 6}{c -}{hline 10}{c BRC}
+
+{com}. 
+. 
+. ** ----------------------------------------------------
+. ** Using DATASET 2 (dataset02_asthma.dta), do the following:
+. ** tabulate the number of annual paediatric events BY SEX, along with an annual summary of dust and rainfall
+. ** ----------------------------------------------------
+. 
+. ** load dataset
+. use "`datapath'\dataset02_asthma.dta", clear
+{txt}(Asthma events and african dust constituents: 1996-2005)
+
+{com}. *histogram rain, by(yoa)
+. 
+. ** Collapse dataset so there is one row per year, containing the median daily dust level and median daily rainfall for that year along with the total number of paediatric events in boys and girls.
+. tempfile pam paf rain
+{txt}
+{com}. 
+. **create dataset with year and male paediatric events
+. preserve
+{txt}
+{com}.     keep yoa pam
+{txt}
+{com}.     collapse (sum) pam, by(yoa)
+{txt}
+{com}.     save `pam'
+{txt}file C:\Users\IANHAM~1\AppData\Local\Temp\ST_99bc_000008.tmp saved
+
+{com}. restore
+{txt}
+{com}. 
+. **create dataset with year and female paediatric events
+. preserve
+{txt}
+{com}.     keep yoa paf
+{txt}
+{com}.     collapse (sum) paf, by(yoa)
+{txt}
+{com}.     save `paf'
+{txt}file C:\Users\IANHAM~1\AppData\Local\Temp\ST_99bc_000009.tmp saved
+
+{com}. restore
+{txt}
+{com}. 
+. **create dataset with year and median daily rainfall
+. preserve
+{txt}
+{com}.     keep yoa rain
+{txt}
+{com}.     collapse (median) rain, by(yoa)
+{txt}
+{com}.     save `rain'
+{txt}file C:\Users\IANHAM~1\AppData\Local\Temp\ST_99bc_00000a.tmp saved
+
+{com}. restore
+{txt}
+{com}. 
+. **combine datasets
+. use `dust'
+{txt}(Asthma events and african dust constituents: 1996-2005)
+
+{com}. merge 1:1 yoa using `pam'
+{res}
+{txt}{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}               0
+{txt}{col 5}matched{col 30}{res}              10{txt}  (_merge==3)
+{col 5}{hline 41}
+
+{com}. drop _merge
+{txt}
+{com}. merge 1:1 yoa using `paf'
+{res}
+{txt}{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}               0
+{txt}{col 5}matched{col 30}{res}              10{txt}  (_merge==3)
+{col 5}{hline 41}
+
+{com}. drop _merge
+{txt}
+{com}. merge 1:1 yoa using `rain'
+{res}
+{txt}{col 5}Result{col 38}# of obs.
+{col 5}{hline 41}
+{col 5}not matched{col 30}{res}               0
+{txt}{col 5}matched{col 30}{res}              10{txt}  (_merge==3)
+{col 5}{hline 41}
+
+{com}. drop _merge
+{txt}
+{com}. 
+. 
+. **tabulate results
+. list yoa dust pam paf rain
+{txt}
+     {c TLC}{hline 6}{c -}{hline 10}{c -}{hline 6}{c -}{hline 6}{c -}{hline 6}{c TRC}
+     {c |} {res} yoa       dust    pam    paf   rain {txt}{c |}
+     {c LT}{hline 6}{c -}{hline 10}{c -}{hline 6}{c -}{hline 6}{c -}{hline 6}{c RT}
+  1. {c |} {res}1996   3.835901   4240   2711     .2 {txt}{c |}
+  2. {c |} {res}1997   8.297643   5070   3322     .3 {txt}{c |}
+  3. {c |} {res}1998   11.53232   3565   2335     .2 {txt}{c |}
+  4. {c |} {res}1999   5.495049   3948   2501     .2 {txt}{c |}
+  5. {c |} {res}2000   9.622713   3390   2222     .6 {txt}{c |}
+     {c LT}{hline 6}{c -}{hline 10}{c -}{hline 6}{c -}{hline 6}{c -}{hline 6}{c RT}
+  6. {c |} {res}2001   13.14182   3146   2094     .1 {txt}{c |}
+  7. {c |} {res}2002   11.96313   3288   2122     .2 {txt}{c |}
+  8. {c |} {res}2003   4.685109   3779   2706     .2 {txt}{c |}
+  9. {c |} {res}2004   4.474849   3753   2667     .7 {txt}{c |}
+ 10. {c |} {res}2005   4.826207   3471   2500     .5 {txt}{c |}
+     {c BLC}{hline 6}{c -}{hline 10}{c -}{hline 6}{c -}{hline 6}{c -}{hline 6}{c BRC}
+
+{com}. 
+. ** ----------------------------------------------------
+. ** Using DATASET 2 (dataset02_asthma.dta), do the following:
+. ** Graph the variation in admissions across the week (Sunday to Saturday)
+. ** ----------------------------------------------------
+. 
+. **load dataset
+. use "`datapath'\dataset02_asthma.dta", clear
+{txt}(Asthma events and african dust constituents: 1996-2005)
+
+{com}. 
+. **create a variable for combined paediatric and adult admissions
+. gen admi = pa + aa
+{txt}
+{com}. order aa, after(pa)
+{txt}
+{com}. order admi, after(aa)
+{txt}
+{com}. histogram admi, by(dow)
+{res}{txt}
+{com}. 
+. preserve
+{txt}
+{com}.     keep admi dow
+{txt}
+{com}.     collapse (median) admi, by(dow)
+{txt}
+{com}.     graph hbar admi, over(dow)
+{res}{txt}
+{com}. restore
+{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. do "X:\OneDrive - The University of the West Indies\repo_datagroup\repo_statatrainingdev\week01_examplecode.do"
+{txt}
+{com}. ** HEADER -----------------------------------------------------
+. **  DO-FILE METADATA
+. //  algorithm name                      week01_examplecode.do
+. //  project:                            Exercise using Collapse and Reshape
+. //  analysts:                           Ian HAMBLETON
+. //      date last modified              15-Aug-2018
+. //  algorithm task                      Example code for the exercise
+. 
+. ** General algorithm set-up
+. version 15
+{txt}
+{com}. clear all
+{res}{txt}
+{com}. macro drop _all
+{txt}
+{com}. set more 1
+{txt}
+{com}. set linesize 80
+{txt}
+{com}. 
+. ** Set working directories: this is for DATASET and LOGFILE import and export
+. ** DATASETS to encrypted SharePoint folder
+. local datapath "X:\The University of the West Indies\DataGroup - repo_data\data_statatrainingdev"
+{txt}
+{com}. ** LOGFILES to unencrypted OneDrive folder
+. local logpath X:\OneDrive - The University of the West Indies\repo_datagroup\repo_statatrainingdev
+{txt}
+{com}. 
+. ** Close any open log fileand open a new log file
+. capture log close
+{smcl}
+{com}{sf}{ul off}
